@@ -4,16 +4,10 @@ import java.util.Scanner;
 
 public class SortedArray {
 
-    private static Scanner scanner = new Scanner(System.in);
-
-    public static void main(String[] args) {
-        int array[] = getIntegers(5);
-        sortIntegers(array);
-        printArray(array);
-    }
-
     public static int[] getIntegers(int numberOfIntegers) {
-        System.out.println("Enter " + numberOfIntegers + " integer values:\r");
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter " + numberOfIntegers + " integer values:");
         int values[] = new int[numberOfIntegers];
         for (int i = 0; i < numberOfIntegers; i++) {
             values[i] = scanner.nextInt();
