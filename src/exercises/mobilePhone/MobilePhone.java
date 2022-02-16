@@ -4,23 +4,23 @@ import java.util.ArrayList;
 
 public class MobilePhone {
 
-    private ArrayList<Contact> contactsList = new ArrayList<Contact>();
+    private ArrayList<Contact> contacts = new ArrayList<Contact>();
 
     public void printContactsList() {
-        System.out.println("You have " + contactsList.size() + " contacts in your mobile phonebook");
-        for (int i = 0; i < contactsList.size(); i++) {
-            System.out.println((i+1) + ". " + contactsList.get(i).getName() + " ("
-                    + contactsList.get(i).getPhoneNumber() + ")");
+        System.out.println("You have " + contacts.size() + " contacts in your mobile phonebook");
+        for (int i = 0; i < contacts.size(); i++) {
+            System.out.println((i+1) + ". " + contacts.get(i).getName() + " ("
+                    + contacts.get(i).getPhoneNumber() + ")");
         }
     }
 
     public void addNewContact(Contact contact) {
-        contactsList.add(contact);
+        contacts.add(contact);
     }
 
-    private int findContact(String name) {
-        for (int i = 0; i < contactsList.size(); i++) {
-            if (contactsList.get(i).getName().equals(name)) {
+    private int indexOfContact(String name) {
+        for (int i = 0; i < contacts.size(); i++) {
+            if (contacts.get(i).getName().equals(name)) {
                 return i;
             }
         }
@@ -28,25 +28,23 @@ public class MobilePhone {
     }
 
     public boolean inPhonebook(String name) {
-        int position = findContact(name);
-        if (position >= 0) {
-            return true;
+        int position = indexOfContact(name);
+        return position >= 0;
         }
-        return false;
-    }
+
 
     public void removeContact(String name) {
-        int position = findContact(name);
+        int position = indexOfContact(name);
         if (position >= 0) {
-            contactsList.remove(position);
+            contacts.remove(position);
             System.out.println("Contact " + name + " removed from phonebook.");
         }
     }
 
     public void updateContact(String currentContactName, Contact newContact) {
-        int position = findContact(currentContactName);
+        int position = indexOfContact(currentContactName);
         if (position >= 0) {
-            contactsList.set(position, newContact);
+            contacts.set(position, newContact);
         }
     }
 }
