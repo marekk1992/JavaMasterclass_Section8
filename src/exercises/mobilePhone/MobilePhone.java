@@ -16,15 +16,21 @@ public class MobilePhone {
 
     public void addNewContact(Contact contact) {
         contacts.add(contact);
+        System.out.println("Contact " + contact.getName() + ", " + contact.getPhoneNumber()
+                + " added to phonebook");
     }
 
-    public String getContact(String name) {
+    public Contact getContact(String name) {
         int position = indexOfContact(name);
         if (inPhonebook(position)) {
-            return "Found: " + contacts.get(position).getName() + ", phone No. "
-                    + contacts.get(position).getPhoneNumber();
+            Contact contact = new Contact(contacts.get(position).getName(),
+                    contacts.get(position).getPhoneNumber());
+            System.out.println("Found: " + contact.getName() + ", phone No. "
+                    + contact.getPhoneNumber());
+            return contact;
         }
-        return "There is no contact with name " + name + " in phonebook";
+        System.out.println("There is no contact with name " + name + " in phonebook");
+        return null;
     }
 
     private int indexOfContact(String name) {
@@ -45,6 +51,8 @@ public class MobilePhone {
         if (inPhonebook(position)) {
             contacts.remove(position);
             System.out.println("Contact " + name + " removed from phonebook.");
+        } else {
+            System.out.println("There is no contact with name " + name + " in phonebook.");
         }
     }
 
@@ -52,6 +60,10 @@ public class MobilePhone {
         int position = indexOfContact(currentContactName);
         if (inPhonebook(position)) {
             contacts.set(position, newContact);
+            System.out.println("Contact " + currentContactName + " updated with " +
+                    newContact.getName() + ", " + newContact.getPhoneNumber());
+            return;
         }
+        System.out.println("There is no contact with name " + currentContactName + " in phonebook.");
     }
 }

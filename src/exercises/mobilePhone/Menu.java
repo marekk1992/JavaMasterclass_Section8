@@ -4,16 +4,15 @@ import java.util.Scanner;
 
 public class Menu {
 
-    private static Scanner scanner = new Scanner(System.in);
-    private static MobilePhone mobilePhone = new MobilePhone();
-    private static boolean quit = false;
-    private static int choice;
+    private Scanner scanner = new Scanner(System.in);
+    private MobilePhone mobilePhone = new MobilePhone();
 
-    public static void initiate() {
+    public void startPhone() {
+        boolean quit = false;
         printInstructions();
         while (!quit) {
             System.out.println("Enter your choice: ");
-            choice = scanner.nextInt();
+            int choice = scanner.nextInt();
             scanner.nextLine();
 
             switch (choice) {
@@ -42,7 +41,7 @@ public class Menu {
         }
     }
 
-    public static void printInstructions() {
+    public void printInstructions() {
         System.out.println("\nPress ");
         System.out.println("\t 0 - To print choice options.");
         System.out.println("\t 1 - To print the phonebook");
@@ -53,7 +52,7 @@ public class Menu {
         System.out.println("\t 6 - To quit the application.");
     }
 
-    public static void addContact() {
+    private void addContact() {
         System.out.print("Enter a name: ");
         String name = scanner.nextLine();
         System.out.print("Enter a phone number: ");
@@ -62,19 +61,19 @@ public class Menu {
         mobilePhone.addNewContact(contact);
     }
 
-    public static void searchForContact() {
+    private void searchForContact() {
         System.out.print("Enter a name: ");
         String searchName = scanner.nextLine();
-        System.out.println(mobilePhone.getContact(searchName));
+        mobilePhone.getContact(searchName);
     }
 
-    public static void removeContact() {
+    private void removeContact() {
         System.out.print("Enter a name: ");
         String nameToRemove = scanner.nextLine();
         mobilePhone.removeContact(nameToRemove);
     }
 
-    public static void updateContact() {
+    private void updateContact() {
         System.out.print("Enter a contact name you want to update: ");
         String currentContactName = scanner.nextLine();
 
