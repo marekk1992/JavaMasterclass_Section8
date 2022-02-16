@@ -54,11 +54,11 @@ public class Menu {
     }
 
     public static void addContact() {
-        Contact contact = new Contact();
         System.out.print("Enter a name: ");
-        contact.setName(scanner.nextLine());
+        String name = scanner.nextLine();
         System.out.print("Enter a phone number: ");
-        contact.setPhoneNumber(scanner.nextLine());
+        String phoneNumber = scanner.nextLine();
+        Contact contact = new Contact(name, phoneNumber);
         mobilePhone.addNewContact(contact);
     }
 
@@ -78,12 +78,12 @@ public class Menu {
         System.out.print("Enter a contact name you want to update: ");
         String currentContactName = scanner.nextLine();
 
-        Contact contact = new Contact();
         System.out.print("Enter new name: ");
-        contact.setName(scanner.nextLine());
+        String name = scanner.nextLine();
         System.out.print("Enter new phone number: ");
-        contact.setPhoneNumber(scanner.nextLine());
+        String phoneNumber = scanner.nextLine();
 
+        Contact contact = new Contact(name, phoneNumber);
         mobilePhone.updateContact(currentContactName, contact);
     }
 }
