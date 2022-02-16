@@ -65,11 +65,7 @@ public class Menu {
     public static void searchForContact() {
         System.out.print("Enter a name: ");
         String searchName = scanner.nextLine();
-        if (mobilePhone.inPhonebook(searchName)) {
-            System.out.println("Found " + searchName + " in your phonebook.");
-        } else {
-            System.out.println(searchName + " is not in your phonebook");
-        }
+        System.out.println(mobilePhone.getContact(searchName));
     }
 
     public static void removeContact() {

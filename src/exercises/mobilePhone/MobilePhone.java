@@ -9,13 +9,22 @@ public class MobilePhone {
     public void printContactsList() {
         System.out.println("You have " + contacts.size() + " contacts in your mobile phonebook");
         for (int i = 0; i < contacts.size(); i++) {
-            System.out.println((i+1) + ". " + contacts.get(i).getName() + " ("
+            System.out.println((i + 1) + ". " + contacts.get(i).getName() + " ("
                     + contacts.get(i).getPhoneNumber() + ")");
         }
     }
 
     public void addNewContact(Contact contact) {
         contacts.add(contact);
+    }
+
+    public String getContact(String name) {
+        int position = indexOfContact(name);
+        if (inPhonebook(position)) {
+            return "Found: " + contacts.get(position).getName() + ", phone No. "
+                    + contacts.get(position).getPhoneNumber();
+        }
+        return "There is no contact with name " + name + " in phonebook";
     }
 
     private int indexOfContact(String name) {
@@ -27,15 +36,13 @@ public class MobilePhone {
         return -1;
     }
 
-    public boolean inPhonebook(String name) {
-        int position = indexOfContact(name);
-        return position >= 0;
-        }
-
+    private boolean inPhonebook(int index) {
+        return index >= 0;
+    }
 
     public void removeContact(String name) {
         int position = indexOfContact(name);
-        if (position >= 0) {
+        if (inPhonebook(position)) {
             contacts.remove(position);
             System.out.println("Contact " + name + " removed from phonebook.");
         }
@@ -43,7 +50,7 @@ public class MobilePhone {
 
     public void updateContact(String currentContactName, Contact newContact) {
         int position = indexOfContact(currentContactName);
-        if (position >= 0) {
+        if (inPhonebook(position)) {
             contacts.set(position, newContact);
         }
     }
