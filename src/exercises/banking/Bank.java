@@ -14,7 +14,10 @@ public class Bank {
     public void addCustomer(String branchName, String newCustomerName) {
         Branch branch = getBranch(branchName);
         if (branch != null) {
-            branch.addCustomer(newCustomerName);
+            if (!branch.addCustomer(newCustomerName)) {
+                System.out.println("ERROR -> Addition failed. Customer " + newCustomerName
+                        + " already exists.");
+            }
         } else {
             System.out.println("ERROR -> Can`t find branch with name " + branchName);
         }
@@ -40,7 +43,7 @@ public class Bank {
         return null;
     }
 
-    public void printCustomersList(String branchName) {
+    public void printBranchCustomers(String branchName) {
         Branch branch = getBranch(branchName);
         if (branch != null) {
             branch.printCustomers(branchName);

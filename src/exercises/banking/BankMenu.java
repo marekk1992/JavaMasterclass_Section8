@@ -55,7 +55,7 @@ public class BankMenu {
     public void printCustomersList() {
         System.out.print("Enter a branch name: ");
         String name = scanner.nextLine();
-        bank.printCustomersList(name);
+        bank.printBranchCustomers(name);
     }
 
     public void printTransactionsList() {

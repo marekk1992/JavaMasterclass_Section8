@@ -21,7 +21,7 @@ public class Customer {
         transactions.add(transaction);
     }
 
-    public void printCustomersTransactions() {
+    public void printTransactions() {
         System.out.println("Transactions: ");
         for (int i = 0; i < transactions.size(); i++) {
             System.out.println((i + 1) + " -> " + String.format("%.2f", transactions.get(i)));

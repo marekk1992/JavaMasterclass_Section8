@@ -12,15 +12,14 @@ public class Branch {
         customers = new ArrayList<Customer>();
     }
 
-    public void addCustomer(String customerName) {
-        for (Customer customer : customers) {
-            if (customer.getCustomerName().equals(customerName)) {
-                System.out.println("ERROR. -> Customer " + customerName + " already exists.");
-            }
+    public boolean addCustomer(String customerName) {
+        if (getCustomer(customerName) == null) {
+            Customer newCustomer = new Customer(customerName);
+            customers.add(newCustomer);
+            System.out.println("Added new customer -> " + customerName);
+            return true;
         }
-        Customer customer = new Customer(customerName);
-        customers.add(customer);
-        System.out.println("Added new customer -> " + customerName);
+        return false;
     }
 
     public void addTransaction(String customerName, double transaction) {
@@ -41,8 +40,8 @@ public class Branch {
 
     public void printCustomerTransactions(String customerName) {
         Customer customer = getCustomer(customerName);
-        if (customer != null)  {
-            customer.printCustomersTransactions();
+        if (customer != null) {
+            customer.printTransactions();
         } else {
             System.out.println("ERROR -> Can`t find customer with name " + customerName);
         }
