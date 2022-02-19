@@ -12,49 +12,47 @@ public class Branch {
         customers = new ArrayList<Customer>();
     }
 
-    public Customer addCustomer(String name) {
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getCustomerName().equals(name)) {
-                System.out.println("ERROR. -> Customer " + name + " already exists.");
-                return null;
+    public void addCustomer(String customerName) {
+        for (Customer customer : customers) {
+            if (customer.getCustomerName().equals(customerName)) {
+                System.out.println("ERROR. -> Customer " + customerName + " already exists.");
             }
         }
-        Customer customer = new Customer(name);
-        return customer;
+        Customer customer = new Customer(customerName);
+        customers.add(customer);
+        System.out.println("Added new customer -> " + customerName);
     }
 
-    public boolean addTransaction(String name, double transaction) {
-        int position = indexOfCustomer(name);
-        if (position >= 0) {
-            customers.get(position).addTransaction(transaction);
-            return true;
-        };
-        return false;
+    public void addTransaction(String customerName, double transaction) {
+        Customer customer = getCustomer(customerName);
+        if (customer != null) {
+            customer.addTransaction(transaction);
+        }
     }
 
-    private int indexOfCustomer(String name) {
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getCustomerName().equals(name)) {
-                return i;
+    private Customer getCustomer(String name) {
+        for (Customer customer : customers) {
+            if (customer.getCustomerName().equals(name)) {
+                return customer;
             }
         }
-        return -1;
+        return null;
     }
 
-    public void printTransactions(String customerName) {
-        int position = indexOfCustomer(customerName);
-        if (position >= 0) {
-            System.out.println("Transactions: ");
-            for (int i = 0; i < (customers.get(position)).getTransactions().size(); i++) {
-                System.out.println((i + 1) + " -> " + customers.get(position).getTransactions().get(i));
-            }
+    public void printCustomerTransactions(String customerName) {
+        Customer customer = getCustomer(customerName);
+        if (customer != null)  {
+            customer.printCustomersTransactions();
         } else {
             System.out.println("ERROR -> Can`t find customer with name " + customerName);
         }
     }
 
-    public ArrayList<Customer> getCustomers() {
-        return customers;
+    public void printCustomers(String branchName) {
+        System.out.println("Branch " + branchName + " has " + customers.size() + " customers");
+        for (int i = 0; i < customers.size(); i++) {
+            System.out.println((i + 1) + " -> " + customers.get(i).getCustomerName());
+        }
     }
 
     public String getName() {

@@ -10,7 +10,7 @@ public class Customer {
     public Customer(String name) {
         this.name = name;
         transactions = new ArrayList<Double>();
-        transactions.add(Double.valueOf(1000));
+        transactions.add(1000.0);
     }
 
     public String getCustomerName() {
@@ -18,10 +18,13 @@ public class Customer {
     }
 
     public void addTransaction(double transaction) {
-        transactions.add(Double.valueOf(transaction));
+        transactions.add(transaction);
     }
 
-    public ArrayList<Double> getTransactions() {
-        return transactions;
+    public void printCustomersTransactions() {
+        System.out.println("Transactions: ");
+        for (int i = 0; i < transactions.size(); i++) {
+            System.out.println((i + 1) + " -> " + String.format("%.2f", transactions.get(i)));
+        }
     }
 }
