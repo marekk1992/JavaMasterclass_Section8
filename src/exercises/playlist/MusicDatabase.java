@@ -13,17 +13,22 @@ public class MusicDatabase {
         playlist = new LinkedList<Song>();
     }
 
+    public LinkedList<Song> getPlaylist() {
+        return playlist;
+    }
+
     public void addAlbumToList(Album album) {
         albums.add(album);
     }
 
-    public boolean addToPlaylist(String songTitle) {
+    public void addToPlaylist(String songTitle) {
         Song mySong = findSongInAlbum(songTitle);
         if (mySong != null) {
             playlist.add(mySong);
-            return true;
+            System.out.println("Song <" + mySong.getTitle() + "> added to playlist.");
+        } else {
+            System.out.println("You don`t have song with title <" + songTitle + "> in your database.");
         }
-        return false;
     }
 
     public void listSongsInPlaylist() {
@@ -38,12 +43,8 @@ public class MusicDatabase {
     }
 
     private Song findSongInAlbum(String songTitle) {
-        int numberOfAlbums = albums.size();
-        if (numberOfAlbums == 0) {
-            return null;
-        }
-        for (int i = 0; i < numberOfAlbums; i++) {
-            Song song = albums.get(i).findSongInAlbum(songTitle);
+        for (Album album : albums) {
+            Song song = album.findSongInAlbum(songTitle);
             if (song != null) {
                 return song;
             }
@@ -52,8 +53,7 @@ public class MusicDatabase {
     }
 
     public Album findAlbumInList(String name) {
-        for (int i = 0; i < albums.size(); i++) {
-            Album myAlbum = albums.get(i);
+        for (Album myAlbum : albums) {
             if (myAlbum.getName().equals(name)) {
                 return myAlbum;
             }
