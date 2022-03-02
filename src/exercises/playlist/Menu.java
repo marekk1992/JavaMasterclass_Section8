@@ -42,7 +42,7 @@ public class Menu {
         }
     }
 
-    public void printMenu() {
+    private void printMenu() {
         System.out.println("\nPress ");
         System.out.println("\t 0 - To print choice options.");
         System.out.println("\t 1 - To print playlist.");
@@ -53,7 +53,7 @@ public class Menu {
         System.out.println("\t 6 - To quit the application.");
     }
 
-    public void printPlayerMenu() {
+    private void printPlayerMenu() {
         System.out.println("\nPress ");
         System.out.println("\t 0 - Close music player.");
         System.out.println("\t 1 - Replay current song.");
@@ -62,7 +62,7 @@ public class Menu {
         System.out.println("\t 4 - Remove current song from playlist.");
     }
 
-    public void createNewAlbum() {
+    private void createNewAlbum() {
         System.out.print("Enter album name: ");
         String title = scanner.nextLine();
         if (database.findAlbumInList(title) == null) {
@@ -74,7 +74,7 @@ public class Menu {
         }
     }
 
-    public void addSongToAlbum() {
+    private void addSongToAlbum() {
         Song newSong = createSong();
         System.out.print("Enter album name where you want to add song <" + newSong.getTitle()
                 + " (" + newSong.getDuration() + ")>: ");
@@ -106,13 +106,13 @@ public class Menu {
         return new Song(title, duration);
     }
 
-    public void addToPlaylist() {
+    private void addToPlaylist() {
         System.out.print("Enter song name: ");
         String title = scanner.nextLine();
         database.addToPlaylist(title);
     }
 
-    public void openMusicPlayer() {
+    private void openMusicPlayer() {
         boolean quit = false;
         boolean goingForward = true;
         System.out.println("Opening music player...............");
@@ -137,7 +137,7 @@ public class Menu {
                     quit = true;
                     break;
                 case 1:
-                    replaySong(listIterator);
+                    goingForward = replaySong(listIterator, goingForward);
                     break;
                 case 2:
                     goingForward = playNextSong(listIterator, goingForward);
@@ -157,9 +157,15 @@ public class Menu {
         printMenu();
     }
 
-    private void replaySong(ListIterator<Song> listIterator) {
-        listIterator.next();
-        System.out.println("Now playing " + listIterator.previous().getTitle());
+    private boolean replaySong(ListIterator<Song> listIterator, boolean movingForwardInList) {
+        if (movingForwardInList) {
+            System.out.println("Now playing " + listIterator.previous().getTitle());
+            movingForwardInList = false;
+        } else {
+            System.out.println("Now playing " + listIterator.next().getTitle());
+            movingForwardInList = true;
+        }
+        return movingForwardInList;
     }
 
     private boolean playNextSong(ListIterator<Song> listIterator, boolean movingForwardInList) {
